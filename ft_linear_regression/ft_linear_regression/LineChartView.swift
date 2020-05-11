@@ -49,8 +49,23 @@ struct LineChartSwiftUI: UIViewRepresentable {
         return dataPoints
     }
 
+    func sortTwoArrays(array1: [Double], array2: [Double]) -> ([Double], [Double]) {
+        var mergedArrays = Array(zip(array1, array2))
+        mergedArrays.sort {
+            $0.0 < $1.0
+        }
+        return (Array(mergedArrays.map { $0.0 }), Array(mergedArrays.map { $0.1 }))
+    }
+
     func getChartPointDataSet() -> LineChartDataSet {
-        let dataPoints = getChartDataPoints(sessions: self.dataset.dictData["km"]!, accuracy: self.dataset.dictData["price"]!)
+        var regressors: [Double]
+        var dependent: [Double]
+        (regressors, dependent) = sortTwoArrays(
+            array1: self.dataset.dictData["km"]!,
+            array2: self.dataset.dictData["price"]!)
+        let dataPoints = getChartDataPoints(
+            sessions: regressors,
+            accuracy: dependent)
         let set = LineChartDataSet(entries: dataPoints, label: "DataSet")
         set.lineWidth = 0
         set.circleRadius = 4

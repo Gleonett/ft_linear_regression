@@ -21,6 +21,11 @@ final class LinearRegression {
         self.minVal = regressors.min()!
     }
     
+    func reset(){
+        self.intercept = 0.0
+        self.bias = 0.0
+    }
+    
     func preprocess(dataArray: [Double]) -> [Double] {
         let result = dataArray.map { ($0 - self.minVal) / (self.maxVal - self.minVal) }
         return result
@@ -28,13 +33,5 @@ final class LinearRegression {
 
     func forward(_ regressor: [Double]) -> [Double] {
         return regressor.map { $0 * self.bias + self.intercept}
-    }
-    
-    func updateIntercept(_ value: Double) {
-        self.intercept = value
-    }
-
-    func updateBias(_ value: Double) {
-        self.bias = value
     }
 }

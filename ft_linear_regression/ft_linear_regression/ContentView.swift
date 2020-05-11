@@ -14,7 +14,9 @@ struct ContentView: View {
     var dataset: TrainData
     var model: LinearRegression
     var optimizationAlgorithm: GradientDescent
-//    var lineChartSwiftUI: LineChartSwiftUI
+
+    @ObservedObject var paramtersModel = ParamtersModel()
+    
     @State var minPrediction: Double
     @State var maxPrediction: Double
     
@@ -22,9 +24,8 @@ struct ContentView: View {
         self._minPrediction = State(initialValue: 0.0)
         self._maxPrediction = State(initialValue: 0.0)
         self.dataset = TrainData(separator: ",")
-        let tmpModel = LinearRegression(regressors: self.dataset.dictData["km"]!)
-        self.model = tmpModel
-        self.optimizationAlgorithm = GradientDescent(model: tmpModel)
+        self.model = LinearRegression(regressors: self.dataset.dictData["km"]!)
+        self.optimizationAlgorithm = GradientDescent(model: self.model)
     }
 
     func updatePredictions() {
@@ -40,30 +41,63 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             VStack (alignment: .leading) {
-                GeometryReader { geometry in
-                    HStack (spacing: 20) {
-                        NavigationLink(destination: DataView(data: self.dataset), label: {
-                            Text("Data")
-                        }).frame(width: geometry.size.width / 2 - 10, height: 50)
-                            .accentColor(Color.init(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))).background(Color.init(#colorLiteral(red: 0.9421919584, green: 0.9352142811, blue: 0.9475316405, alpha: 1))).cornerRadius(10)
-                        Button(action: {
-                            self.optimizationAlgorithm.train(
-                                regressors: self.dataset.dictData["km"]!,
-                                dependentValues: self.dataset.dictData["price"]!)
-                            print("End training")
-                            self.updatePredictions()
-                        }, label: {
-                            Text("Train")
-                        }).frame(width: geometry.size.width / 2 - 10, height: 50)
-                        .accentColor(Color.init(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))).background(Color.init(#colorLiteral(red: 0.9421919584, green: 0.9352142811, blue: 0.9475316405, alpha: 1))).cornerRadius(10)
-                    }
-                }.padding().frame(height: 50)
-                Divider()
+
                 GeometryReader { geometry in
                     LineChartSwiftUI(dataset: self.dataset, model: self.model, minPrediction: self.$minPrediction, maxPrediction: self.$maxPrediction)
-                            .frame(width: geometry.size.width, height: geometry.size.height / 2, alignment: .center)
-                    Spacer()
+                            .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
+                }.padding().frame(height: 300)
+
+                GeometryReader { geometry in
+                    NavigationLink(
+                        destination: ParametersView(paramtersModel: self.paramtersModel),
+                        label: { Text("Parameters") })
+                    .frame(width: geometry.size.width - 10, height: 50)
+                    .accentColor(Color(UIColor.label))
+                    .background(Color(UIColor.secondarySystemBackground))
+                    .cornerRadius(10)
                 }.padding()
+                .frame(height: 50)
+
+                GeometryReader { geometry in
+                    Button(action: {
+                                self.optimizationAlgorithm.reset()
+                                self.model.reset()
+                                self.updatePredictions()},
+                           label: { Text("Reset")})
+                    .frame(width: geometry.size.width - 10, height: 50)
+                    .accentColor(Color(UIColor.label))
+                    .background(Color(UIColor.secondarySystemBackground))
+                    .cornerRadius(10)
+                }.padding().frame(height: 50)
+
+                
+                GeometryReader { geometry in
+                    Button(action: {
+                        self.optimizationAlgorithm.train(
+                            regressors: self.dataset.dictData["km"]!,
+                            dependentValues: self.dataset.dictData["price"]!)
+                        print("End training")
+                        self.updatePredictions()
+                    }, label: {
+                        Text("Train")
+                    })
+                    .frame(width: geometry.size.width - 10, height: 50)
+                    .accentColor(Color(UIColor.label))
+                    .background(Color(UIColor.secondarySystemBackground))
+                    .cornerRadius(10)
+                }.padding().frame(height: 50)
+                
+                
+                GeometryReader { geometry in
+                    Button(action: { print("kek") },
+                           label: { Text("Predict") })
+                        .frame(width: geometry.size.width - 10, height: 50)
+                        .accentColor(Color(UIColor.label))
+                        .background(Color(UIColor.secondarySystemBackground))
+                        .cornerRadius(10)
+                }.padding().frame(height: 50)
+                
+                
             }.navigationBarTitle("Linear Regression")
         }
     }
