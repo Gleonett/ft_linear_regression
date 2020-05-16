@@ -8,40 +8,11 @@
 
 import SwiftUI
 
-struct SingleParameterView: View {
-
-    let parameterName: String
-    @Binding var number: String
-    
-    var body: some View {
-        GeometryReader { geometry in
-            Spacer(minLength: 10)
-            VStack (alignment: .leading) {
-                Text(self.parameterName + ":")
-                    .font(.title)
-                    .foregroundColor(Color(UIColor.label))
-                    .frame(height: 10)
-                TextField(" enter a number ...",
-                          text: Binding(get: { self.number },
-                                        set: {
-                                            self.number = $0.filter { "0123456789.".contains($0)
-                                            }
-                                        }))
-                    .frame(width: geometry.size.width, height: 40)
-                    .background(Color(UIColor.secondarySystemBackground))
-                    .cornerRadius(5)
-                    .keyboardType(.numbersAndPunctuation)
-            }
-        }.padding(10).frame(height: 100)
-    }
-}
-
-
 struct IterationsNumber : View {
+    
+    let epochsList: Array<String>
 
     @Binding var epochsNumberSelection: Int
-
-    let epochs = stride(from: 100, to: 16100, by: 100).map { String($0) }
     
     var body: some View {
         VStack (alignment: .leading) {
@@ -51,8 +22,8 @@ struct IterationsNumber : View {
             .frame(height: 10)
             GeometryReader { geometry in
                 Picker(selection: self.$epochsNumberSelection, label: Text("")) {
-                    ForEach(0 ..< self.epochs.count) {
-                        Text(self.epochs[$0])
+                    ForEach(0 ..< self.epochsList.count) {
+                        Text(self.epochsList[$0])
                     }
                 }.frame(width: geometry.size.width,
                         height: geometry.size.height - 10)
@@ -68,19 +39,38 @@ struct IterationsNumber : View {
 
 struct ParametersView: View {
 
-    @ObservedObject var paramtersModel: ParamtersModel
+    let epochsList: Array<String>
+    @Binding var initLearningRate: Double
+    @Binding var decay: Double
+    @Binding var errorThreshhold: Double
+    @Binding var epochsNumberSelection: Int
     
     var body: some View {
         VStack (alignment: .leading) {
-            SingleParameterView(parameterName: "Initial learning rate",
-                                number: $paramtersModel.initLearningRate)
-            SingleParameterView(parameterName: "Decay",
-                                number: $paramtersModel.decay)
-            SingleParameterView(parameterName: "Learning threshhold",
-                                number: $paramtersModel.errorThreshhold)
-            IterationsNumber(
-                epochsNumberSelection: $paramtersModel.epochsNumberSelection)
+            SingleParameterView(number: self.$initLearningRate,
+                                numberVal: self.initLearningRate,
+                                parameterName: "Initial learning rate",
+                                parameterExplanation: "LR = ILR / (decay * iteration + 1)",
+                                minLimit: -Double.nan,
+                                maxLimit: Double.nan)
+            SingleParameterView(number: self.$decay,
+                                numberVal: self.decay,
+                                parameterName: "Decay",
+                                parameterExplanation: "LR = ILR / (decay * iteration + 1)",
+                                minLimit: -Double.nan,
+                                maxLimit: Double.nan)
+            SingleParameterView(number: self.$errorThreshhold,
+                                numberVal: self.errorThreshhold,
+                                parameterName: "Accuracy threshold",
+                                parameterExplanation: "default is 0.0001",
+                                minLimit: -Double.nan,
+                                maxLimit: Double.nan)
+            IterationsNumber(epochsList: self.epochsList,
+                             epochsNumberSelection: self.$epochsNumberSelection)
             Spacer()
         }
+    }
+    
+    func update() {
     }
 }

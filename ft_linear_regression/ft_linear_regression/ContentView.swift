@@ -14,11 +14,19 @@ struct ContentView: View {
     var dataset: TrainData
     var model: LinearRegression
     var optimizationAlgorithm: GradientDescent
-
-    @ObservedObject var paramtersModel = ParamtersModel()
+    
+    @State var regressor = 0.0
     
     @State var minPrediction: Double
     @State var maxPrediction: Double
+    // States for ParamtersView
+    // LineChartView don't updates with @ObservedObject only with @States
+    // This is a bag of Charts framework or SwiftUI
+    let epochsList: Array<String> = stride(from: 100, to: 16100, by: 100).map { String($0) }
+    @State var initLearningRate: Double = 1.0
+    @State var decay: Double = 0.001
+    @State var errorThreshhold: Double = 0.0001
+    @State var epochsNumberSelection: Int = 3
     
     init() {
         self._minPrediction = State(initialValue: 0.0)
@@ -43,16 +51,24 @@ struct ContentView: View {
             VStack (alignment: .leading) {
 
                 GeometryReader { geometry in
-                    LineChartSwiftUI(dataset: self.dataset, model: self.model, minPrediction: self.$minPrediction, maxPrediction: self.$maxPrediction)
+                    LineChartSwiftUI(dataset: self.dataset,
+                                     model: self.model,
+                                     minPrediction: self.$minPrediction,
+                                     maxPrediction: self.$maxPrediction,
+                                     regressor: self.$regressor)
                             .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
                 }.padding().frame(height: 300)
 
                 GeometryReader { geometry in
                     NavigationLink(
-                        destination: ParametersView(paramtersModel: self.paramtersModel),
+                        destination: ParametersView(epochsList: self.epochsList,
+                                                    initLearningRate: self.$initLearningRate,
+                                                    decay: self.$decay,
+                                                    errorThreshhold: self.$errorThreshhold,
+                                                    epochsNumberSelection: self.$epochsNumberSelection),
                         label: { Text("Parameters") })
                     .frame(width: geometry.size.width - 10, height: 50)
-                    .accentColor(Color(UIColor.label))
+                    .accentColor(Color(UIColor.link))
                     .background(Color(UIColor.secondarySystemBackground))
                     .cornerRadius(10)
                 }.padding()
@@ -62,8 +78,9 @@ struct ContentView: View {
                     Button(action: {
                                 self.optimizationAlgorithm.reset()
                                 self.model.reset()
-                                self.updatePredictions()},
-                           label: { Text("Reset")})
+                                self.updatePredictions()
+                            },
+                           label: { Text("Reset") })
                     .frame(width: geometry.size.width - 10, height: 50)
                     .accentColor(Color(UIColor.label))
                     .background(Color(UIColor.secondarySystemBackground))
@@ -73,9 +90,13 @@ struct ContentView: View {
                 
                 GeometryReader { geometry in
                     Button(action: {
-                        self.optimizationAlgorithm.train(
-                            regressors: self.dataset.dictData["km"]!,
-                            dependentValues: self.dataset.dictData["price"]!)
+                        self.optimizationAlgorithm.setParamters(
+                            epochs: Int(self.epochsList[self.epochsNumberSelection])!,
+                            decay: self.decay,
+                            initLearningRate: self.initLearningRate,
+                            epsilonError: self.errorThreshhold)
+                        self.optimizationAlgorithm.train(regressors: self.dataset.dictData["km"]!,
+                                                         dependentValues: self.dataset.dictData["price"]!)
                         print("End training")
                         self.updatePredictions()
                     }, label: {
@@ -89,12 +110,14 @@ struct ContentView: View {
                 
                 
                 GeometryReader { geometry in
-                    Button(action: { print("kek") },
-                           label: { Text("Predict") })
-                        .frame(width: geometry.size.width - 10, height: 50)
+                    NavigationLink(
+                        destination: PredictionView(model: self.model,
+                                                    regressor: self.$regressor),
+                        label: { Text("Predict") })
+                    .frame(width: geometry.size.width - 10, height: 50)
                         .accentColor(Color(UIColor.label))
-                        .background(Color(UIColor.secondarySystemBackground))
-                        .cornerRadius(10)
+                    .background(Color(UIColor.secondarySystemBackground))
+                    .cornerRadius(10)
                 }.padding().frame(height: 50)
                 
                 

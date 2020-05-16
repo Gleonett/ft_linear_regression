@@ -14,28 +14,49 @@ struct LineChartSwiftUI: UIViewRepresentable {
     let lineChart = LineChartView()
     var dataset: TrainData
     var model: LinearRegression
+    var pointDataset: LineChartDataSet?
+    
     @Binding var minPrediction: Double
     @Binding var maxPrediction: Double
     
-//    init(dataset: TrainData, model: LinearRegression) {
-//        self.dataset = dataset
-//        self.model = model
-//    }
+    @Binding var regressor: Double
+    
+    init(dataset: TrainData, model: LinearRegression, minPrediction: Binding<Double> , maxPrediction: Binding<Double>, regressor: Binding<Double>) {
+        self.dataset = dataset
+        self.model = model
+        self._minPrediction = minPrediction
+        self._maxPrediction = maxPrediction
+        self._regressor = regressor
+        self.pointDataset = getChartPointDataSet(x: self.dataset.dictData["km"]!,
+                                                 y: self.dataset.dictData["price"]!,
+                                                 color: UIColor.init(cgColor: #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)),
+                                                 circleRadius: 4,
+                                                 label: "DataSet")
+    }
 
     func makeUIView(context: UIViewRepresentableContext<LineChartSwiftUI>) -> LineChartView {
         setUpChart()
-        print("in makeUIView")
         return lineChart
     }
 
     func updateUIView(_ uiView: LineChartView, context: UIViewRepresentableContext<LineChartSwiftUI>){
         print("in updateUIView")
-        setUpChart()
+        
+        
+        let dataSets = [self.pointDataset!,
+                        getChartLineDataSet(),
+                        getChartPointDataSet(x: [self.regressor],
+                                             y: [self.model.predict(value: self.regressor)],
+                                             color: UIColor.init(cgColor: #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1)),
+                                             circleRadius: 6,
+                                             label: "Prediction")]
+        let data = LineChartData(dataSets: dataSets)
+        lineChart.data = data
     }
 
     func setUpChart() {
         lineChart.noDataText = "No Data Available"
-        let dataSets = [getChartPointDataSet(), getChartLineDataSet()]
+        let dataSets = [self.pointDataset!, getChartLineDataSet()]
         let data = LineChartData(dataSets: dataSets)
         data.setValueFont(.systemFont(ofSize: 7, weight: .light))
         lineChart.data = data
@@ -49,36 +70,25 @@ struct LineChartSwiftUI: UIViewRepresentable {
         return dataPoints
     }
 
-    func sortTwoArrays(array1: [Double], array2: [Double]) -> ([Double], [Double]) {
-        var mergedArrays = Array(zip(array1, array2))
-        mergedArrays.sort {
-            $0.0 < $1.0
-        }
-        return (Array(mergedArrays.map { $0.0 }), Array(mergedArrays.map { $0.1 }))
-    }
-
-    func getChartPointDataSet() -> LineChartDataSet {
-        var regressors: [Double]
-        var dependent: [Double]
-        (regressors, dependent) = sortTwoArrays(
-            array1: self.dataset.dictData["km"]!,
-            array2: self.dataset.dictData["price"]!)
+    func getChartPointDataSet(x: [Double],
+                              y: [Double],
+                              color: UIColor,
+                              circleRadius: CGFloat,
+                              label: String) -> LineChartDataSet {
         let dataPoints = getChartDataPoints(
-            sessions: regressors,
-            accuracy: dependent)
-        let set = LineChartDataSet(entries: dataPoints, label: "DataSet")
+            sessions: x,
+            accuracy: y)
+        let set = LineChartDataSet(entries: dataPoints, label: label)
         set.lineWidth = 0
-        set.circleRadius = 4
+        set.circleRadius = circleRadius
         set.circleHoleRadius = 2
-        let color = UIColor.init(cgColor: #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1))
+        let color = color
         set.setColor(color)
         set.setCircleColor(color)
         return set
     }
     
     func getChartLineDataSet() -> LineChartDataSet {
-        print([self.model.minVal,self.model.maxVal])
-        print([self.minPrediction, self.maxPrediction])
         let dataPoints = getChartDataPoints(
             sessions: [self.model.minVal,self.model.maxVal],
             accuracy: [self.minPrediction, self.maxPrediction])

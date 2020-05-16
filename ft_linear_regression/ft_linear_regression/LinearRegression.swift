@@ -34,4 +34,10 @@ final class LinearRegression {
     func forward(_ regressor: [Double]) -> [Double] {
         return regressor.map { $0 * self.bias + self.intercept}
     }
+    
+    func predict(value: Double) -> Double {
+        var prediction = self.preprocess(dataArray: [value])
+        prediction = self.forward(prediction)
+        return prediction[0]
+    }
 }

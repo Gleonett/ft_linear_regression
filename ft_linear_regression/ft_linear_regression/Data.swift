@@ -7,10 +7,16 @@
 //
 
 import Foundation
+import Darwin
 
 enum ParserCSVError: Error {
     case invalidNumberOfColumns
+    case invalidNumberOfColumnsKeys
+    case invalidColumnsKeys
     case invalidCellValue
+    case invalidAmountOfData
+    case emptyFile
+    case unexpectedError
 }
 
 class TrainData {
@@ -21,13 +27,38 @@ class TrainData {
         self.stringData = self.readCSV()
         do {
             try self.ParseCSVToDictionary(data: self.stringData, separator: separator)
+        } catch ParserCSVError.invalidNumberOfColumnsKeys {
+            print(ParserCSVError.self, ":", ParserCSVError.invalidNumberOfColumnsKeys)
+            exit(10)
+        } catch ParserCSVError.invalidColumnsKeys {
+            print(ParserCSVError.self, ":", ParserCSVError.invalidColumnsKeys)
+            exit(11)
         } catch ParserCSVError.invalidNumberOfColumns {
-            print(ParserCSVError.invalidNumberOfColumns)
+            print(ParserCSVError.self, ":", ParserCSVError.invalidNumberOfColumns)
+            exit(12)
         } catch ParserCSVError.invalidCellValue {
-            print(ParserCSVError.invalidCellValue)
+            print(ParserCSVError.self, ":", ParserCSVError.invalidCellValue)
+            exit(13)
+        } catch ParserCSVError.invalidAmountOfData {
+            print(ParserCSVError.self, ":", ParserCSVError.invalidAmountOfData)
+            exit(14)
+        } catch ParserCSVError.emptyFile {
+            print(ParserCSVError.self, ":", ParserCSVError.emptyFile)
+            exit(15)
         } catch {
-            print("Some unexpected ERROR while parsing CSV File")
+            print(ParserCSVError.self, ":", ParserCSVError.unexpectedError)
+            exit(16)
         }
+        (self.dictData["km"], self.dictData["price"]) =
+            self.sortTwoArrays(array1: self.dictData["km"]!, array2: self.dictData["price"]!)
+    }
+    
+    func sortTwoArrays(array1: [Double], array2: [Double]) -> ([Double], [Double]) {
+        var mergedArrays = Array(zip(array1, array2))
+        mergedArrays.sort {
+            $0.0 < $1.0
+        }
+        return (Array(mergedArrays.map { $0.0 }), Array(mergedArrays.map { $0.1 }))
     }
     
     func readCSV() -> String {
@@ -46,13 +77,22 @@ class TrainData {
     func ParseCSVToDictionary(data: String, separator: String) throws {
         var rows = data.components(separatedBy: "\n")
         rows = rows.filter { $0 != "" }
+        guard rows.count != 0 else {
+            throw ParserCSVError.emptyFile
+        }
         var keys: [String] = []
         for row in rows {
-            let columns = row.components(separatedBy: separator)
+            let columns = row.components(separatedBy: separator).filter { $0 != "" }
             if self.dictData.isEmpty {
                 for key in columns {
                     self.dictData[key] = []
                     keys.append(key)
+                }
+                guard keys.count == 2 else {
+                    throw ParserCSVError.invalidNumberOfColumnsKeys
+                }
+                guard keys.contains("km") && keys.contains("price") else {
+                    throw ParserCSVError.invalidColumnsKeys
                 }
                 continue
             }
@@ -65,6 +105,9 @@ class TrainData {
                 }
                 self.dictData[key]?.append(typeVal)
             }
+        }
+        guard dictData[keys[0]]!.count >= 2 else {
+            throw ParserCSVError.invalidAmountOfData
         }
     }
 }

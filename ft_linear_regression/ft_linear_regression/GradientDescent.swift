@@ -31,6 +31,13 @@ class GradientDescent {
         self.iterationNumber = 0
     }
     
+    func setParamters(epochs: Int, decay: Double, initLearningRate: Double, epsilonError: Double) {
+        self.epochs = epochs
+        self.decay = decay
+        self.initLearningRate = initLearningRate
+        self.epsilonError = epsilonError
+    }
+    
     func linearLearningRateOptimizer() -> Double {
         return self.initLearningRate / (self.decay * Double(self.iterationNumber) + 1)
     }
@@ -44,6 +51,7 @@ class GradientDescent {
         var sumBias: Double
         
         let startTime = Date()
+        print("epochs", self.epochs)
         while self.iterationNumber % self.epochs < self.epochs - 1 {
             sumIntercept = 0
             sumBias = 0
@@ -53,7 +61,6 @@ class GradientDescent {
                 sumBias += ((prediction - dependent) * regressor)
             }
             self.learningRate = self.linearLearningRateOptimizer()
-            print(learningRate)
             self.model.intercept -= (sumIntercept / m * self.learningRate)
             self.model.bias -= (sumBias / m * self.learningRate)
             if abs(self.model.intercept - self.tmpIntercept) < self.epsilonError &&
