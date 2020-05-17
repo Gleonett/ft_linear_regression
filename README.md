@@ -24,7 +24,7 @@ git submodule update --init --recursive
 
 Main view contains visualization for model, dataset and buttons:
 * `Parameters` - Link to Parameters view
-* `Reset` - Reset already trained linear regression model's parameters
+* `Reset` - Reset already trained linear regression model parameters
 * `Train` - Train model
 * `Predict` - Link to Prediction view
 ### Parameters view
