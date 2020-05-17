@@ -51,23 +51,27 @@ class GradientDescent {
         var sumBias: Double
         
         let startTime = Date()
-        print("epochs", self.epochs)
         while self.iterationNumber % self.epochs < self.epochs - 1 {
             sumIntercept = 0
             sumBias = 0
+            
             predictions = self.model.forward(processedRegressors)
+            
             for ((regressor, dependent), prediction) in zip(regressorsToDependent, predictions) {
                 sumIntercept += (prediction - dependent)
                 sumBias += ((prediction - dependent) * regressor)
             }
+            
             self.learningRate = self.linearLearningRateOptimizer()
             self.model.intercept -= (sumIntercept / m * self.learningRate)
             self.model.bias -= (sumBias / m * self.learningRate)
+            
             if abs(self.model.intercept - self.tmpIntercept) < self.epsilonError &&
                 abs(self.model.bias - self.tmpBias) < self.epsilonError {
-                print(self.iterationNumber)
+                print("End training at \(self.iterationNumber) epoch")
                 break
             }
+            
             self.tmpIntercept = self.model.intercept
             self.tmpBias = self.model.bias
             self.iterationNumber += 1

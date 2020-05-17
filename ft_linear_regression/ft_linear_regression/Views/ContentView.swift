@@ -10,18 +10,22 @@ import SwiftUI
 import Charts
 
 struct ContentView: View {
+    // LineChartView updates only with @States
+    // This is a bag of Charts framework or SwiftUI
+    // That's why thera are no @EnvironmentObject and @ObservedObject
     
     var dataset: TrainData
     var model: LinearRegression
     var optimizationAlgorithm: GradientDescent
     
+    // regressor for prediction
     @State var regressor = 0.0
     
+    // Predictions to visualize linear regression model in lineChart
     @State var minPrediction: Double
     @State var maxPrediction: Double
+
     // States for ParamtersView
-    // LineChartView don't updates with @ObservedObject only with @States
-    // This is a bag of Charts framework or SwiftUI
     let epochsList: Array<String> = stride(from: 100, to: 16100, by: 100).map { String($0) }
     @State var initLearningRate: Double = 1.0
     @State var decay: Double = 0.001
@@ -42,8 +46,6 @@ struct ContentView: View {
         let predictions = self.model.forward(processedRegressors)
         self.minPrediction = predictions[0]
         self.maxPrediction = predictions[1]
-        print("list values: ", predictions[0], predictions[1])
-        print("struct values: ", self.minPrediction, self.maxPrediction)
     }
 
     var body: some View {
@@ -66,7 +68,10 @@ struct ContentView: View {
                                                     decay: self.$decay,
                                                     errorThreshhold: self.$errorThreshhold,
                                                     epochsNumberSelection: self.$epochsNumberSelection),
-                        label: { Text("Parameters") })
+                        label: {
+                            Text("Parameters")
+                            .frame(minWidth: geometry.size.width, maxWidth: .infinity, minHeight: 0, maxHeight: 50, alignment: .center)
+                        })
                     .frame(width: geometry.size.width - 10, height: 50)
                     .accentColor(Color(UIColor.link))
                     .background(Color(UIColor.secondarySystemBackground))
@@ -80,7 +85,10 @@ struct ContentView: View {
                                 self.model.reset()
                                 self.updatePredictions()
                             },
-                           label: { Text("Reset") })
+                           label: {
+                            Text("Reset")
+                            .frame(minWidth: geometry.size.width, maxWidth: .infinity, minHeight: 0, maxHeight: 50, alignment: .center)
+                    })
                     .frame(width: geometry.size.width - 10, height: 50)
                     .accentColor(Color(UIColor.label))
                     .background(Color(UIColor.secondarySystemBackground))
@@ -97,11 +105,11 @@ struct ContentView: View {
                             epsilonError: self.errorThreshhold)
                         self.optimizationAlgorithm.train(regressors: self.dataset.dictData["km"]!,
                                                          dependentValues: self.dataset.dictData["price"]!)
-                        print("End training")
                         self.updatePredictions()
                     }, label: {
                         Text("Train")
-                    })
+                        .frame(minWidth: geometry.size.width, maxWidth: .infinity, minHeight: 0, maxHeight: 50, alignment: .center)
+                        })
                     .frame(width: geometry.size.width - 10, height: 50)
                     .accentColor(Color(UIColor.label))
                     .background(Color(UIColor.secondarySystemBackground))
@@ -113,14 +121,15 @@ struct ContentView: View {
                     NavigationLink(
                         destination: PredictionView(model: self.model,
                                                     regressor: self.$regressor),
-                        label: { Text("Predict") })
+                        label: {
+                            Text("Predict")
+                            .frame(minWidth: geometry.size.width, maxWidth: .infinity, minHeight: 0, maxHeight: 50, alignment: .center)
+                        })
                     .frame(width: geometry.size.width - 10, height: 50)
                         .accentColor(Color(UIColor.label))
                     .background(Color(UIColor.secondarySystemBackground))
                     .cornerRadius(10)
                 }.padding().frame(height: 50)
-                
-                
             }.navigationBarTitle("Linear Regression")
         }
     }

@@ -70,7 +70,4 @@ struct ParametersView: View {
             Spacer()
         }
     }
-    
-    func update() {
-    }
 }

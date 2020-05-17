@@ -11,20 +11,16 @@
 		C46AE0D72467182F0013CE1C /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C46AE0D3246718250013CE1C /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C46AE0DD2467F1880013CE1C /* ParametersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46AE0DC2467F1880013CE1C /* ParametersView.swift */; };
 		C47B84B82461360300760217 /* LineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47B84B72461360300760217 /* LineChartView.swift */; };
-		C4B08491245EE46C007306D7 /* DataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B08490245EE46C007306D7 /* DataView.swift */; };
 		C4B50EEF2455BCD0002384A9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B50EEE2455BCD0002384A9 /* AppDelegate.swift */; };
 		C4B50EF12455BCD0002384A9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B50EF02455BCD0002384A9 /* SceneDelegate.swift */; };
 		C4B50EF32455BCD0002384A9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B50EF22455BCD0002384A9 /* ContentView.swift */; };
 		C4B50EF52455BCD3002384A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4B50EF42455BCD3002384A9 /* Assets.xcassets */; };
 		C4B50EF82455BCD3002384A9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4B50EF72455BCD3002384A9 /* Preview Assets.xcassets */; };
 		C4B50EFB2455BCD3002384A9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4B50EF92455BCD3002384A9 /* LaunchScreen.storyboard */; };
-		C4B50F062455BCD4002384A9 /* ft_linear_regressionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B50F052455BCD4002384A9 /* ft_linear_regressionTests.swift */; };
-		C4B50F112455BCD4002384A9 /* ft_linear_regressionUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B50F102455BCD4002384A9 /* ft_linear_regressionUITests.swift */; };
 		C4B50F202455DE72002384A9 /* data.csv in Resources */ = {isa = PBXBuildFile; fileRef = C4B50F1F2455DE72002384A9 /* data.csv */; };
 		C4B50F242455E439002384A9 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B50F232455E439002384A9 /* Data.swift */; };
 		C4B7CA0E24702776005EB335 /* PredictionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B7CA0D24702776005EB335 /* PredictionView.swift */; };
 		C4B7CA12247050A2005EB335 /* SingleParameterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B7CA11247050A1005EB335 /* SingleParameterView.swift */; };
-		C4C342D5246932A6008C6305 /* ParametersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C342D4246932A6008C6305 /* ParametersModel.swift */; };
 		C4D8E2EC24617415000AA11E /* LinearRegression.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D8E2EB24617415000AA11E /* LinearRegression.swift */; };
 		C4D8E2F02461746A000AA11E /* GradientDescent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D8E2EF2461746A000AA11E /* GradientDescent.swift */; };
 /* End PBXBuildFile section */
@@ -78,8 +74,6 @@
 		C46AE0CD246718250013CE1C /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = ../../Desktop/Charts/Charts.xcodeproj; sourceTree = "<group>"; };
 		C46AE0DC2467F1880013CE1C /* ParametersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParametersView.swift; sourceTree = "<group>"; };
 		C47B84B72461360300760217 /* LineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChartView.swift; sourceTree = "<group>"; };
-		C4A33074245EAADC00B16AEB /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		C4B08490245EE46C007306D7 /* DataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataView.swift; sourceTree = "<group>"; };
 		C4B50EEB2455BCCF002384A9 /* ft_linear_regression.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ft_linear_regression.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4B50EEE2455BCD0002384A9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C4B50EF02455BCD0002384A9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -89,16 +83,11 @@
 		C4B50EFA2455BCD3002384A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C4B50EFC2455BCD3002384A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C4B50F012455BCD4002384A9 /* ft_linear_regressionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ft_linear_regressionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C4B50F052455BCD4002384A9 /* ft_linear_regressionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ft_linear_regressionTests.swift; sourceTree = "<group>"; };
-		C4B50F072455BCD4002384A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C4B50F0C2455BCD4002384A9 /* ft_linear_regressionUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ft_linear_regressionUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C4B50F102455BCD4002384A9 /* ft_linear_regressionUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ft_linear_regressionUITests.swift; sourceTree = "<group>"; };
-		C4B50F122455BCD4002384A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C4B50F1F2455DE72002384A9 /* data.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = data.csv; path = ../../data/data.csv; sourceTree = "<group>"; };
 		C4B50F232455E439002384A9 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		C4B7CA0D24702776005EB335 /* PredictionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredictionView.swift; sourceTree = "<group>"; };
 		C4B7CA11247050A1005EB335 /* SingleParameterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleParameterView.swift; sourceTree = "<group>"; };
-		C4C342D4246932A6008C6305 /* ParametersModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParametersModel.swift; sourceTree = "<group>"; };
 		C4D8E2EB24617415000AA11E /* LinearRegression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearRegression.swift; sourceTree = "<group>"; };
 		C4D8E2EF2461746A000AA11E /* GradientDescent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientDescent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -138,24 +127,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		C4A3308B245ECA4600B16AEB /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		C4B50EE22455BCCF002384A9 = {
 			isa = PBXGroup;
 			children = (
 				C46AE0CD246718250013CE1C /* Charts.xcodeproj */,
-				C4A33074245EAADC00B16AEB /* MyPlayground.playground */,
 				C4B50F1E2455DE20002384A9 /* data */,
 				C4B50EED2455BCD0002384A9 /* ft_linear_regression */,
-				C4B50F042455BCD4002384A9 /* ft_linear_regressionTests */,
-				C4B50F0F2455BCD4002384A9 /* ft_linear_regressionUITests */,
 				C4B50EEC2455BCCF002384A9 /* Products */,
-				C4A3308B245ECA4600B16AEB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -174,9 +152,7 @@
 			children = (
 				C4B50EEE2455BCD0002384A9 /* AppDelegate.swift */,
 				C4B50EF02455BCD0002384A9 /* SceneDelegate.swift */,
-				C4B50EF22455BCD0002384A9 /* ContentView.swift */,
-				C47B84B72461360300760217 /* LineChartView.swift */,
-				C4B08490245EE46C007306D7 /* DataView.swift */,
+				C4B7CA1324711FCA005EB335 /* Views */,
 				C4B50EF42455BCD3002384A9 /* Assets.xcassets */,
 				C4B50EF92455BCD3002384A9 /* LaunchScreen.storyboard */,
 				C4B50EFC2455BCD3002384A9 /* Info.plist */,
@@ -184,10 +160,6 @@
 				C4B50F232455E439002384A9 /* Data.swift */,
 				C4D8E2EB24617415000AA11E /* LinearRegression.swift */,
 				C4D8E2EF2461746A000AA11E /* GradientDescent.swift */,
-				C46AE0DC2467F1880013CE1C /* ParametersView.swift */,
-				C4C342D4246932A6008C6305 /* ParametersModel.swift */,
-				C4B7CA0D24702776005EB335 /* PredictionView.swift */,
-				C4B7CA11247050A1005EB335 /* SingleParameterView.swift */,
 			);
 			path = ft_linear_regression;
 			sourceTree = "<group>";
@@ -200,30 +172,24 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		C4B50F042455BCD4002384A9 /* ft_linear_regressionTests */ = {
-			isa = PBXGroup;
-			children = (
-				C4B50F052455BCD4002384A9 /* ft_linear_regressionTests.swift */,
-				C4B50F072455BCD4002384A9 /* Info.plist */,
-			);
-			path = ft_linear_regressionTests;
-			sourceTree = "<group>";
-		};
-		C4B50F0F2455BCD4002384A9 /* ft_linear_regressionUITests */ = {
-			isa = PBXGroup;
-			children = (
-				C4B50F102455BCD4002384A9 /* ft_linear_regressionUITests.swift */,
-				C4B50F122455BCD4002384A9 /* Info.plist */,
-			);
-			path = ft_linear_regressionUITests;
-			sourceTree = "<group>";
-		};
 		C4B50F1E2455DE20002384A9 /* data */ = {
 			isa = PBXGroup;
 			children = (
 				C4B50F1F2455DE72002384A9 /* data.csv */,
 			);
 			path = data;
+			sourceTree = "<group>";
+		};
+		C4B7CA1324711FCA005EB335 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C47B84B72461360300760217 /* LineChartView.swift */,
+				C4B50EF22455BCD0002384A9 /* ContentView.swift */,
+				C46AE0DC2467F1880013CE1C /* ParametersView.swift */,
+				C4B7CA0D24702776005EB335 /* PredictionView.swift */,
+				C4B7CA11247050A1005EB335 /* SingleParameterView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -389,11 +355,9 @@
 				C4D8E2EC24617415000AA11E /* LinearRegression.swift in Sources */,
 				C4B50EEF2455BCD0002384A9 /* AppDelegate.swift in Sources */,
 				C4B50EF12455BCD0002384A9 /* SceneDelegate.swift in Sources */,
-				C4B08491245EE46C007306D7 /* DataView.swift in Sources */,
 				C4D8E2F02461746A000AA11E /* GradientDescent.swift in Sources */,
 				C4B50F242455E439002384A9 /* Data.swift in Sources */,
 				C4B50EF32455BCD0002384A9 /* ContentView.swift in Sources */,
-				C4C342D5246932A6008C6305 /* ParametersModel.swift in Sources */,
 				C46AE0DD2467F1880013CE1C /* ParametersView.swift in Sources */,
 				C4B7CA0E24702776005EB335 /* PredictionView.swift in Sources */,
 				C4B7CA12247050A2005EB335 /* SingleParameterView.swift in Sources */,
@@ -405,7 +369,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C4B50F062455BCD4002384A9 /* ft_linear_regressionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -413,7 +376,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C4B50F112455BCD4002384A9 /* ft_linear_regressionUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

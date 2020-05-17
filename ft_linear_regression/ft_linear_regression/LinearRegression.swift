@@ -31,8 +31,8 @@ final class LinearRegression {
         return result
     }
 
-    func forward(_ regressor: [Double]) -> [Double] {
-        return regressor.map { $0 * self.bias + self.intercept}
+    func forward(_ regressors: [Double]) -> [Double] {
+        return regressors.map { $0 * self.bias + self.intercept}
     }
     
     func predict(value: Double) -> Double {

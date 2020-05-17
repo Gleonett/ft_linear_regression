@@ -40,9 +40,6 @@ struct LineChartSwiftUI: UIViewRepresentable {
     }
 
     func updateUIView(_ uiView: LineChartView, context: UIViewRepresentableContext<LineChartSwiftUI>){
-        print("in updateUIView")
-        
-        
         let dataSets = [self.pointDataset!,
                         getChartLineDataSet(),
                         getChartPointDataSet(x: [self.regressor],
