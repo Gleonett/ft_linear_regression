@@ -21,6 +21,7 @@ git submodule update --init --recursive
 ## Explanation
 ### Main view
 ![Main_view](https://github.com/Gleonett/ft_linear_regression/blob/master/readme_images/main_view.jpg)
+
 Main view contains visualization for model, dataset and buttons:
 * `Parameters` - Link to Parameters view
 * `Reset` - Reset already trained linear regression model's parameters
@@ -28,6 +29,7 @@ Main view contains visualization for model, dataset and buttons:
 * `Predict` - Link to Prediction view
 ### Parameters view
 ![Parameters_view](https://github.com/Gleonett/ft_linear_regression/blob/master/readme_images/parameters_view.jpg)
+
 `Learning rate` is a tuning parameter in an optimization algorithm that determines the step size at each iteration while moving toward a minimum of a loss function
 ```
 learningRate = initinalLearningRate / (decay * currentEpoch + 1)
