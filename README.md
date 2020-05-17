@@ -15,9 +15,9 @@ cd ft_linear_regression
 git submodule update --init --recursive
 ```
 1. Open `ft_linear_regression/ft_linear_regression.xcodeproj`
-1. Drag the `Charts/Charts.xcodeproj` to the project  
-2. Go to your target's settings, hit the "+" under the "Embedded Binaries" section, and select the Charts.framework
-3. Build and run
+2. Drag the `Charts/Charts.xcodeproj` to the project  
+3. Go to your target's settings, hit the "+" under the "Embedded Binaries" section, and select the Charts.framework
+4. Build and run
 
 ## Explanation
 ### Main view
