@@ -1,6 +1,6 @@
 # ft_linear_regression
 
-It is the simple iOS application for training linear regression with gradient descent optimization algorithm. You can change parameters to see how do they affect learning.
+It is the simple iOS application for training `linear regression` with `gradient descent` optimization algorithm. You can change parameters to see how do they affect learning.
 
 ## Tested with:
 * macOS Catalina - 10.15.5 Beta
