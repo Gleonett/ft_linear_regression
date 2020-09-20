@@ -59,43 +59,10 @@ struct ContentView: View {
                                      maxPrediction: self.$maxPrediction,
                                      regressor: self.$regressor)
                             .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
-                }.padding().frame(height: 300)
+                }
+//                .padding()
+                .frame(height: 260)
 
-                GeometryReader { geometry in
-                    NavigationLink(
-                        destination: ParametersView(epochsList: self.epochsList,
-                                                    initLearningRate: self.$initLearningRate,
-                                                    decay: self.$decay,
-                                                    errorThreshhold: self.$errorThreshhold,
-                                                    epochsNumberSelection: self.$epochsNumberSelection),
-                        label: {
-                            Text("Parameters")
-                            .frame(minWidth: geometry.size.width, maxWidth: .infinity, minHeight: 0, maxHeight: 50, alignment: .center)
-                        })
-                    .frame(width: geometry.size.width - 10, height: 50)
-                    .accentColor(Color(UIColor.link))
-                    .background(Color(UIColor.secondarySystemBackground))
-                    .cornerRadius(10)
-                }.padding()
-                .frame(height: 50)
-
-                GeometryReader { geometry in
-                    Button(action: {
-                                self.optimizationAlgorithm.reset()
-                                self.model.reset()
-                                self.updatePredictions()
-                            },
-                           label: {
-                            Text("Reset")
-                            .frame(minWidth: geometry.size.width, maxWidth: .infinity, minHeight: 0, maxHeight: 50, alignment: .center)
-                    })
-                    .frame(width: geometry.size.width - 10, height: 50)
-                    .accentColor(Color(UIColor.label))
-                    .background(Color(UIColor.secondarySystemBackground))
-                    .cornerRadius(10)
-                }.padding().frame(height: 50)
-
-                
                 GeometryReader { geometry in
                     Button(action: {
                         self.optimizationAlgorithm.setParamters(
@@ -110,26 +77,59 @@ struct ContentView: View {
                         Text("Train")
                         .frame(minWidth: geometry.size.width, maxWidth: .infinity, minHeight: 0, maxHeight: 50, alignment: .center)
                         })
-                    .frame(width: geometry.size.width - 10, height: 50)
+                    .frame(width: geometry.size.width, height: 50)
                     .accentColor(Color(UIColor.label))
                     .background(Color(UIColor.secondarySystemBackground))
                     .cornerRadius(10)
                 }.padding().frame(height: 50)
                 
+                GeometryReader { geometry in
+                    Button(action: {
+                                self.optimizationAlgorithm.reset()
+                                self.model.reset()
+                                self.updatePredictions()
+                            },
+                           label: {
+                            Text("Reset")
+                            .frame(minWidth: geometry.size.width, maxWidth: .infinity, minHeight: 0, maxHeight: 50, alignment: .center)
+                    })
+                    .frame(width: geometry.size.width, height: 50)
+                    .accentColor(Color(UIColor.label))
+                    .background(Color(UIColor.secondarySystemBackground))
+                    .cornerRadius(10)
+                }.padding().frame(height: 50)
                 
                 GeometryReader { geometry in
                     NavigationLink(
                         destination: PredictionView(model: self.model,
                                                     regressor: self.$regressor),
                         label: {
-                            Text("Predict")
+                            Text("Prediction")
                             .frame(minWidth: geometry.size.width, maxWidth: .infinity, minHeight: 0, maxHeight: 50, alignment: .center)
                         })
-                    .frame(width: geometry.size.width - 10, height: 50)
-                        .accentColor(Color(UIColor.label))
+                    .frame(width: geometry.size.width, height: 50)
+                        .accentColor(Color(UIColor.link))
                     .background(Color(UIColor.secondarySystemBackground))
                     .cornerRadius(10)
                 }.padding().frame(height: 50)
+
+                GeometryReader { geometry in
+                    NavigationLink(
+                        destination: ParametersView(epochsList: self.epochsList,
+                                                    initLearningRate: self.$initLearningRate,
+                                                    decay: self.$decay,
+                                                    errorThreshhold: self.$errorThreshhold,
+                                                    epochsNumberSelection: self.$epochsNumberSelection),
+                        label: {
+                            Text("Parameters")
+                            .frame(minWidth: geometry.size.width, maxWidth: .infinity, minHeight: 0, maxHeight: 50, alignment: .center)
+                        })
+                    .frame(width: geometry.size.width, height: 50)
+                    .accentColor(Color(UIColor.link))
+                    .background(Color(UIColor.secondarySystemBackground))
+                    .cornerRadius(10)
+                }.padding()
+                .frame(height: 50)
             }.navigationBarTitle("Linear Regression")
         }
     }

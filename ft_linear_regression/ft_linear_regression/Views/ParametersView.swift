@@ -26,7 +26,7 @@ struct IterationsNumber : View {
                         Text(self.epochsList[$0])
                     }
                 }.frame(width: geometry.size.width,
-                        height: geometry.size.height - 10)
+                        height: geometry.size.height)
                 .pickerStyle(WheelPickerStyle())
                 .labelsHidden()
                 .background(Color(UIColor.secondarySystemBackground))

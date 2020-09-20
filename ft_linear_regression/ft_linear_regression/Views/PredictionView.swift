@@ -36,6 +36,7 @@ struct PredictionView: View {
                                     maxLimit: 100000000)
                 Spacer()
             }
-        }.padding().frame(height: 600)
+        }
+//        .padding().frame(height: 600)
     }
 }

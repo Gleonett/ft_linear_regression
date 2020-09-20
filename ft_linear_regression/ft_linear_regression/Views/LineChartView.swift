@@ -48,7 +48,7 @@ struct LineChartSwiftUI: UIViewRepresentable {
                                              circleRadius: 6,
                                              label: "Prediction")]
         let data = LineChartData(dataSets: dataSets)
-        lineChart.data = data
+        uiView.data = data
     }
 
     func setUpChart() {

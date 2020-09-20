@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C456B2EC25174CF300FE22DD /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C456B2E525174CDF00FE22DD /* Charts.framework */; };
+		C456B2ED25174CF300FE22DD /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C456B2E525174CDF00FE22DD /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C46AE0DD2467F1880013CE1C /* ParametersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46AE0DC2467F1880013CE1C /* ParametersView.swift */; };
 		C47B84B82461360300760217 /* LineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47B84B72461360300760217 /* LineChartView.swift */; };
 		C4B50EEF2455BCD0002384A9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B50EEE2455BCD0002384A9 /* AppDelegate.swift */; };
@@ -24,6 +26,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		C456B2E425174CDF00FE22DD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C456B2DF25174CDF00FE22DD /* Charts.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 65AD9E95D9ED4DC0BD73A743;
+			remoteInfo = Charts;
+		};
+		C456B2E625174CDF00FE22DD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C456B2DF25174CDF00FE22DD /* Charts.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1CBBC58C6CE1EBEE9852CE41;
+			remoteInfo = ChartsTests;
+		};
 		C4B50F022455BCD4002384A9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C4B50EE32455BCCF002384A9 /* Project object */;
@@ -47,6 +63,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				C456B2ED25174CF300FE22DD /* Charts.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -54,6 +71,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C456B2DF25174CDF00FE22DD /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = ../../Charts/Charts.xcodeproj; sourceTree = "<group>"; };
 		C46AE0DC2467F1880013CE1C /* ParametersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParametersView.swift; sourceTree = "<group>"; };
 		C47B84B72461360300760217 /* LineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChartView.swift; sourceTree = "<group>"; };
 		C4B50EEB2455BCCF002384A9 /* ft_linear_regression.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ft_linear_regression.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -79,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C456B2EC25174CF300FE22DD /* Charts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,12 +118,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C456B2E025174CDF00FE22DD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C456B2E525174CDF00FE22DD /* Charts.framework */,
+				C456B2E725174CDF00FE22DD /* ChartsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C460F74025174AA60084BEFA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		C4B50EE22455BCCF002384A9 = {
 			isa = PBXGroup;
 			children = (
+				C456B2DF25174CDF00FE22DD /* Charts.xcodeproj */,
 				C4B50F1E2455DE20002384A9 /* data */,
 				C4B50EED2455BCD0002384A9 /* ft_linear_regression */,
 				C4B50EEC2455BCCF002384A9 /* Products */,
+				C460F74025174AA60084BEFA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -229,7 +266,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1130;
-				LastUpgradeCheck = 1130;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = Student21;
 				TargetAttributes = {
 					C4B50EEA2455BCCF002384A9 = {
@@ -258,6 +295,12 @@
 			);
 			productRefGroup = C4B50EEC2455BCCF002384A9 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = C456B2E025174CDF00FE22DD /* Products */;
+					ProjectRef = C456B2DF25174CDF00FE22DD /* Charts.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				C4B50EEA2455BCCF002384A9 /* ft_linear_regression */,
@@ -266,6 +309,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		C456B2E525174CDF00FE22DD /* Charts.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Charts.framework;
+			remoteRef = C456B2E425174CDF00FE22DD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C456B2E725174CDF00FE22DD /* ChartsTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ChartsTests.xctest;
+			remoteRef = C456B2E625174CDF00FE22DD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		C4B50EE92455BCCF002384A9 /* Resources */ = {
@@ -380,6 +440,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -440,6 +501,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -484,7 +546,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "school.ft-linear-regression";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -504,7 +566,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "school.ft-linear-regression";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
